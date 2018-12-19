@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+nav{
+    padding: 16px;
+    background-color: #2e2eb8;
+}
+
+nav li{
+    display: inline;
+}
+
+nav ul{
+    display: inline;
+    padding: 0;
+}
+
+nav form{
+    display: inline;
+    float: right;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    padding: 0.5em;
+}
+
+nav a:hover{
+    font-weight: bold;
+}
+
+#products{
+    width: 800px;
+    margin: 2em auto 0 auto;
+}
+
+#products tr td{
+    border-bottom: 1px solid black;
+}
+#szures{
+    width: 80%;
+    margin: 0 auto;
+}
+#szures a{
+    margin-right: 1em;
+}
