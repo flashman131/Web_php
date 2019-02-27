@@ -1,37 +1,15 @@
 <?php
-session_start();
 require_once('../config/connect.php');
+session_start();
 
-if (isset($_POST['enter'])) {
+if (isset($_SESSION['userid'])) {
 
-    $email = $_POST['email'];
-    $pwd = $_POST['pwd'];
-
-    $sql = "SELECT * FROM user WHERE email = ? AND password = ?;";
-    $stmt = $connection->prepare($sql);
-    $stmt->bind_param("ss", $email, $pwd);
-    $stmt->execute();
-    $stmt->store_result();
-
-    if ($stmt->num_rows == 1) {
-
-        /*
-         * Sikeres bejelentkezés
-         */
-        $stmt->bind_result($id, $email, $pwd, $firstname, $lastname);
-        $stmt->fetch();
-        $_SESSION['userid'] = $id;
-    } else {
-
-        /*
-         * Érvénytelen email cím vagy jelszó
-         */
-        header('Location: ../index.php');
-    }
+    $sql = "SELECT * FROM gallery;";
+    $fileContent = file_get_contents($_FILES['upload_file']['tmp_name']);
 }
 ?>
 <!DOCTYPE html>
-<html lang="hu">
+<html>
     <head>
         <meta charset="utf-8"/>
         <title>Galéria</title>
@@ -54,10 +32,9 @@ if (isset($_POST['enter'])) {
                 </p>
             </ul>
         </nav>
-        <?php echo "<h3>{$lastname} {$firstname} névvel jelentkezett be.</h3>"; ?>
+        <div class="container"></div>
     </body>
 </html>
 <?php
 $stmt->close();
-$connection->close();
 ?>

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="hu">
     <head>
@@ -7,7 +8,6 @@
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <link rel="icon" href="./img/gallery.png" type="image/x-icon"/>
-
     </head>
     <body>
         <div class="container">
@@ -20,6 +20,13 @@
                     </form>
                 </div>
             </div>
+            <?php
+            if (isset($_SESSION['jogosulatlan']) && $_SESSION['jogosulatlan']) {
+                $error = file_get_contents('html/error.html');
+                echo $error;
+                unset($_SESSION['jogosulatlan']);
+            }
+            ?>
         </div>
     </body>
 </html>
