@@ -67,7 +67,7 @@ if (isset($_POST['upload']) && (isset($_SESSION['userid']))) {
             <ul class="navbar">
                 <p class="nav-item">
                     <a href="upload.php" class="nav-link">Kép feltöltése</a>
-                    <a href="pictures.php" class="nav-link">Képek megtekintése</a>
+                    <a href="galeria.php" class="nav-link">Képek megtekintése</a>
                     <?php
                     if (isset($_SESSION['userid'])) {
                         echo '<a href="logout.php" class="nav-link">Kilépés</a>';

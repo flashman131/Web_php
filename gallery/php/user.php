@@ -44,7 +44,7 @@ if (isset($_POST['enter'])) {
         <nav class="navbar navbar-expand">
             <ul class="navbar">
                 <p class="nav-item">
-                    <a href="pictures.php" class="nav-link">Képek megtekintése</a>
+                    <a href="galeria.php" class="nav-link">Képek megtekintése</a>
                     <a href="upload.php" class="nav-link">Kép feltöltése</a>
                     <?php
                     if (isset($_SESSION['userid'])) {

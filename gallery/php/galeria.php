@@ -1,12 +1,22 @@
 <?php
-require_once('../config/connect.php');
-session_start();
+require_once('../config/init.php');
 
-if (isset($_SESSION['userid'])) {
+$uid = $_SESSION['userid'];
+$sql = "SELECT * FROM gallery WHERE uid = ?;";
 
-    $sql = "SELECT * FROM gallery;";
-    $fileContent = file_get_contents($_FILES['upload_file']['tmp_name']);
+$stmt = $connection->prepare($sql);
+$stmt->bind_param('i', $uid);
+$stmt->execute();
+$stmt->bind_result($id, $uid, $title, $description, $img);
+$kepek = "<div class='row>";
+while ($stmt->fetch()) {
+    $kepek .= "<div class='col-3'>"
+            . "<img class='img-thumbnail' src='../uploads/{$img}'/>"
+            . "</div>";
 }
+$kepek .= '</div>';
+$stmt -> close();
+$connection->close();
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +32,7 @@ if (isset($_SESSION['userid'])) {
         <nav class="navbar navbar-expand">
             <ul class="navbar">
                 <p class="nav-item">
-                    <a href="pictures.php" class="nav-link">Képek megtekintése</a>
+                    <a href="galeria.php" class="nav-link">Képek megtekintése</a>
                     <a href="upload.php" class="nav-link">Kép feltöltése</a>
                     <?php
                     if (isset($_SESSION['userid'])) {
@@ -32,9 +42,8 @@ if (isset($_SESSION['userid'])) {
                 </p>
             </ul>
         </nav>
-        <div class="container"></div>
+        <div class="container-fluid">
+            <?php echo $kepek; ?>
+        </div>
     </body>
 </html>
-<?php
-$stmt->close();
-?>
